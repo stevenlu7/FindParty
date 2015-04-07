@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PartySearch</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="psnName">PSN Name</string>
+    <string name="level">Level</string>
+	<string name="note">Ex: Looking for 3 more players</string>
+
+</resources>
