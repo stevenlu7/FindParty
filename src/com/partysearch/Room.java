@@ -1,5 +1,14 @@
 package com.partysearch;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
+
+import com.firebase.client.ServerValue;
+import com.shaded.fasterxml.jackson.annotation.JsonIgnore;
+
 
 public class Room {
 
@@ -7,6 +16,7 @@ public class Room {
 	private int level;
 	private String note;
 	private String gametype;
+	private Long time;
 	
     // Required default constructor for Firebase object mapping
     @SuppressWarnings("unused")
@@ -35,4 +45,26 @@ public class Room {
 	public String getGametype(){
 		return gametype;
 	}
+	
+    public java.util.Map<String, String> getTime() {
+        return ServerValue.TIMESTAMP;
+    }
+    
+    @JsonIgnore
+    public Long getTimeLong() {
+       return time;
+    }
+
+    public void setTime(Long time) {
+        this.time = time;
+    }
+    
+    public String calculateTime(long time){
+    	SimpleDateFormat dateFormat = new SimpleDateFormat( "HH:mm" );
+    	Calendar cal = Calendar.getInstance();
+    	cal.setTimeInMillis(time);
+    	cal.add(Calendar.HOUR, -3); //edt to pst
+    	String timestamp = dateFormat.format(cal.getTime());
+    	return timestamp;
+    }
 }

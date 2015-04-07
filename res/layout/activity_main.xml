@@ -62,16 +62,6 @@
         android:layout_alignParentRight="true" />
 
     <TextView
-        android:id="@+id/levelHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/gametypeHeader"
-        android:layout_alignBottom="@+id/gametypeHeader"
-        android:layout_toLeftOf="@+id/level"
-        android:text="Level"
-        android:textStyle="bold" />
-
-    <TextView
         android:id="@+id/usernameHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -89,16 +79,6 @@
         android:layout_below="@+id/gametypeHeader" >
     </ListView>
 
-    <TextView
-        android:id="@+id/gametypeHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/spinner"
-        android:layout_below="@+id/createRoom"
-        android:layout_marginLeft="20dp"
-        android:text="Gametype"
-        android:textStyle="bold" />
-
     <Button
         android:id="@+id/remove"
         android:layout_width="wrap_content"
@@ -107,5 +87,32 @@
         android:layout_alignRight="@+id/level"
         android:text="Remove Post" 
         android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/gametypeHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/remove"
+        android:layout_below="@+id/createRoom"
+        android:text="Gametype"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@android:id/list"
+        android:layout_alignParentRight="true"
+        android:text="Time"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/levelHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@android:id/list"
+        android:layout_alignLeft="@+id/remove"
+        android:text="Level"
+        android:textStyle="bold" />
 
 </RelativeLayout>

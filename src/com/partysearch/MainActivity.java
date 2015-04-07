@@ -17,10 +17,12 @@ import android.widget.Toast;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.ServerValue;
 import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class MainActivity extends ListActivity implements OnClickListener {
@@ -155,12 +157,12 @@ public class MainActivity extends ListActivity implements OnClickListener {
 		newRoom = new Room(psnName.getText().toString(), Integer.parseInt(level
 				.getText().toString()), note.getText().toString(), spinner
 				.getSelectedItem().toString());
+		//Map timestamp = newRoom.getTime();
+		//newRoom.setTime(timestamp);
 		firebaseChild = firebaseRef.push();
 		//firebaseRef.push().setValue(newRoom);
 		firebaseChild.setValue(newRoom);
 		
-		System.out.println("key: " + firebaseChild.toString());
-		// firebaseRef.getp
 		// firebaseRef.child("userName").setValue(newRoom.getUserName());
 		// firebaseRef.child("level").setValue(newRoom.getLevel());
 		// firebaseRef.child("note").setValue(newRoom.getNote());
