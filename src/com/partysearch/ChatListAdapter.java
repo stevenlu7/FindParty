@@ -44,6 +44,8 @@ public class ChatListAdapter extends FirebaseListAdapter<Room> {
        // } else {
         //    authorText.setTextColor(Color.BLUE);
        // }
+        ((TextView) view.findViewById(R.id.level)).setText(room.getLevel() + "");
         ((TextView) view.findViewById(R.id.note)).setText(room.getNote());
+        ((TextView) view.findViewById(R.id.gametype)).setText(room.getGametype());
     }
 }
