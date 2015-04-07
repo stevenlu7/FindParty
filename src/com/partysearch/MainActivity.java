@@ -150,7 +150,7 @@ public class MainActivity extends ListActivity implements OnClickListener{
 		//firebaseRef.child("userName").setValue(newRoom.getUserName());
 		//firebaseRef.child("level").setValue(newRoom.getLevel());
 		//firebaseRef.child("note").setValue(newRoom.getNote());
-		//firebaseRef.child("gametype").setValue(newRoom.getGametype());
+		///firebaseRef.child("gametype").setValue(newRoom.getGametype());
 
     }
     
