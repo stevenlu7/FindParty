@@ -23,16 +23,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MainActivity extends ListActivity implements OnClickListener{
+public class MainActivity extends ListActivity implements OnClickListener {
 
-    private static final String FIREBASE_URL = "https://blistering-heat-2311.firebaseio.com";
+	private static final String FIREBASE_URL = "https://blistering-heat-2311.firebaseio.com";
 
-    private String mUsername;
-    private Firebase firebaseRef;
-    private ValueEventListener mConnectedListener;
-    private ChatListAdapter mChatListAdapter;
-    
-    private Room newRoom;
+	private String mUsername;
+	private Firebase firebaseRef;
+	private Firebase firebaseChild;
+	private ValueEventListener mConnectedListener;
+	private ChatListAdapter mChatListAdapter;
+
+	private Room newRoom;
 	private EditText psnName;
 	private EditText level;
 	private EditText note;
@@ -41,72 +42,78 @@ public class MainActivity extends ListActivity implements OnClickListener{
 	private Button removeButton;
 	private Button postButton;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Firebase.setAndroidContext(this);
-        
-        setTitle("Chatting as " + mUsername);
-        psnName = (EditText) findViewById(R.id.psnInput);
-        level = (EditText) findViewById(R.id.level);
-        note = (EditText) findViewById(R.id.note);
-        listView = (ListView) findViewById(android.R.id.list);
-        spinner = (Spinner) findViewById(R.id.spinner);
-        
-        removeButton = (Button) findViewById(R.id.remove);
-        removeButton.setBackgroundColor(Color.RED);
-        postButton = (Button) findViewById(R.id.createRoom);
-        postButton.setOnClickListener(this);
-        removeButton.setOnClickListener(this);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		Firebase.setAndroidContext(this);
 
-        // Setup our Firebase mFirebaseRef
-        firebaseRef = new Firebase(FIREBASE_URL).child("chat");
-        populateSpinner();
+		setTitle("Chatting as " + mUsername);
+		psnName = (EditText) findViewById(R.id.psnInput);
+		level = (EditText) findViewById(R.id.level);
+		note = (EditText) findViewById(R.id.note);
+		listView = (ListView) findViewById(android.R.id.list);
+		spinner = (Spinner) findViewById(R.id.spinner);
 
+		removeButton = (Button) findViewById(R.id.remove);
+		removeButton.setBackgroundColor(Color.RED);
+		postButton = (Button) findViewById(R.id.createRoom);
+		postButton.setOnClickListener(this);
+		removeButton.setOnClickListener(this);
 
+		// Setup our Firebase mFirebaseRef
+		firebaseRef = new Firebase(FIREBASE_URL).child("chat");
+		firebaseChild = new Firebase(FIREBASE_URL);
+		
+		populateSpinner();
 
-    }
+	}
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Setup our view and list adapter. Ensure it scrolls to the bottom as data changes
-        //final ListView listView = getListView();
-        // Tell our list adapter that we only want 50 messages at a time
-        mChatListAdapter = new ChatListAdapter(firebaseRef.limit(50), this, R.layout.room_info, psnName.getText().toString());
-        listView.setAdapter(mChatListAdapter);
-        mChatListAdapter.registerDataSetObserver(new DataSetObserver() {
-            @Override
-            public void onChanged() {
-                super.onChanged();
-                listView.setSelection(mChatListAdapter.getCount() - 1);
-            }
-        });
+	@Override
+	public void onStart() {
+		super.onStart();
+		// Setup our view and list adapter. Ensure it scrolls to the bottom as
+		// data changes
+		// final ListView listView = getListView();
+		// Tell our list adapter that we only want 50 messages at a time
+		mChatListAdapter = new ChatListAdapter(firebaseRef.limit(50), this,
+				R.layout.room_info, psnName.getText().toString());
+		listView.setAdapter(mChatListAdapter);
+		mChatListAdapter.registerDataSetObserver(new DataSetObserver() {
+			@Override
+			public void onChanged() {
+				super.onChanged();
+				listView.setSelection(mChatListAdapter.getCount() - 1);
+			}
+		});
 
-        // Finally, a little indication of connection status
-        mConnectedListener = firebaseRef.getRoot().child(".info/connected").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                boolean connected = (Boolean) dataSnapshot.getValue();
-                if (connected) {
-                    Toast.makeText(MainActivity.this, "Connected to Firebase", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(MainActivity.this, "Disconnected from Firebase", Toast.LENGTH_SHORT).show();
-                }
-            }
+		// Finally, a little indication of connection status
+		mConnectedListener = firebaseRef.getRoot().child(".info/connected")
+				.addValueEventListener(new ValueEventListener() {
+					@Override
+					public void onDataChange(DataSnapshot dataSnapshot) {
+						boolean connected = (Boolean) dataSnapshot.getValue();
+						if (connected) {
+							Toast.makeText(MainActivity.this,
+									"Connected to Firebase", Toast.LENGTH_SHORT)
+									.show();
+						} else {
+							Toast.makeText(MainActivity.this,
+									"Disconnected from Firebase",
+									Toast.LENGTH_SHORT).show();
+						}
+					}
 
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                // No-op
-            }
-        });
-    }
-
+					@Override
+					public void onCancelled(FirebaseError firebaseError) {
+						// No-op
+					}
+				});
+	}
 
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()){
+		switch (v.getId()) {
 		case R.id.createRoom:
 			makeRoom();
 			removeButton.setVisibility(View.VISIBLE);
@@ -117,45 +124,63 @@ public class MainActivity extends ListActivity implements OnClickListener{
 			removeButton.setVisibility(View.INVISIBLE);
 			postButton.setVisibility(View.VISIBLE);
 			break;
-		}		
+		}
+
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		firebaseRef.getRoot().child(".info/connected")
+				.removeEventListener(mConnectedListener);
+		mChatListAdapter.cleanup();
+	}
+
+	private void populateSpinner() {
+		spinner = (Spinner) findViewById(R.id.spinner);
+		List<String> list = new ArrayList<String>();
+		list.add("Supply Raid");
+		list.add("Interrogation");
+		list.add("Survivors");
+		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, list);
+		dataAdapter
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner.setAdapter(dataAdapter);
+	}
+
+	private void makeRoom() {
+		
+		// Firebase(FIREBASE_URL).child(psnName.getText().toString());
+		newRoom = new Room(psnName.getText().toString(), Integer.parseInt(level
+				.getText().toString()), note.getText().toString(), spinner
+				.getSelectedItem().toString());
+		firebaseChild = firebaseRef.push();
+		//firebaseRef.push().setValue(newRoom);
+		firebaseChild.setValue(newRoom);
+		
+		System.out.println("key: " + firebaseChild.toString());
+		// firebaseRef.getp
+		// firebaseRef.child("userName").setValue(newRoom.getUserName());
+		// firebaseRef.child("level").setValue(newRoom.getLevel());
+		// firebaseRef.child("note").setValue(newRoom.getNote());
+		// /firebaseRef.child("gametype").setValue(newRoom.getGametype());
+
+	}
+
+	private void removeRoom() {
+		if(!firebaseChild.equals(FIREBASE_URL)){
+			String childPath = splitUrl(firebaseChild.toString());
+			System.out.println("path: " + childPath);
+			firebaseRef.child(childPath).removeValue();
+		}
+		
 		
 	}
 	
-    @Override
-    public void onStop() {
-        super.onStop();
-        firebaseRef.getRoot().child(".info/connected").removeEventListener(mConnectedListener);
-        mChatListAdapter.cleanup();
-    }
-    
-    private void populateSpinner(){
-    	spinner = (Spinner) findViewById(R.id.spinner);
-    	List<String> list = new ArrayList<String>();
-    	list.add("Supply Raid");
-    	list.add("Interrogation");
-    	list.add("Survivors");
-    	ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-    		android.R.layout.simple_spinner_item, list);
-    	dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-    	spinner.setAdapter(dataAdapter);
-    }
-    
-    private void makeRoom(){
-    	//firebaseRef = new Firebase(FIREBASE_URL).child(psnName.getText().toString());
-		newRoom = new Room(psnName.getText().toString(), 
-				Integer.parseInt(level.getText().toString()), 
-				note.getText().toString(),
-				spinner.getSelectedItem().toString());
-		firebaseRef.push().setValue(newRoom);
-		//firebaseRef.child("userName").setValue(newRoom.getUserName());
-		//firebaseRef.child("level").setValue(newRoom.getLevel());
-		//firebaseRef.child("note").setValue(newRoom.getNote());
-		///firebaseRef.child("gametype").setValue(newRoom.getGametype());
-
-    }
-    
-    private void removeRoom(){
-    	firebaseRef.removeValue();
-    }
+	private String splitUrl(String url){
+		String[] parts = url.split("\\/");
+		return parts[parts.length-1];
+	}
 
 }

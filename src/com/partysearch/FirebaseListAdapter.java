@@ -60,9 +60,9 @@ public abstract class FirebaseListAdapter<T> extends BaseAdapter {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
             	Log.d("firebase adapter", "onChildAdded");
-            	System.out.println("key: " + dataSnapshot.getKey());
+            	//System.out.println("key: " + dataSnapshot.getKey());
                 T model = dataSnapshot.getValue(FirebaseListAdapter.this.mModelClass);
-                System.out.println("it is: " + model.toString());
+                //System.out.println("it is: " + model.toString());
                 Log.d("firebase adapter", "onChildAdded, after getValue");
                 mModelKeys.put(dataSnapshot.getKey(), model);
 
