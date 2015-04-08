@@ -11,19 +11,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.firebase.client.ServerValue;
 import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends ListActivity implements OnClickListener {
 
@@ -43,6 +43,9 @@ public class MainActivity extends ListActivity implements OnClickListener {
 	private Spinner spinner;
 	private Button removeButton;
 	private Button postButton;
+	
+	private Timer timer;
+	private TimerTask timerTask;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,24 @@ public class MainActivity extends ListActivity implements OnClickListener {
 		
 		populateSpinner();
 
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.createRoom:
+			makeRoom();
+			removeButton.setVisibility(View.VISIBLE);
+			postButton.setVisibility(View.INVISIBLE);
+			startTimer();
+			break;
+		case R.id.remove:
+			removeRoom();
+			removeButton.setVisibility(View.INVISIBLE);
+			postButton.setVisibility(View.VISIBLE);
+			stopTimer();
+			break;
+		}
 	}
 
 	@Override
@@ -113,29 +134,14 @@ public class MainActivity extends ListActivity implements OnClickListener {
 				});
 	}
 
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.createRoom:
-			makeRoom();
-			removeButton.setVisibility(View.VISIBLE);
-			postButton.setVisibility(View.INVISIBLE);
-			break;
-		case R.id.remove:
-			removeRoom();
-			removeButton.setVisibility(View.INVISIBLE);
-			postButton.setVisibility(View.VISIBLE);
-			break;
-		}
-
-	}
-
+	
 	@Override
 	public void onStop() {
 		super.onStop();
 		firebaseRef.getRoot().child(".info/connected")
 				.removeEventListener(mConnectedListener);
 		mChatListAdapter.cleanup();
+		removeRoom();
 	}
 
 	private void populateSpinner() {
@@ -157,8 +163,6 @@ public class MainActivity extends ListActivity implements OnClickListener {
 		newRoom = new Room(psnName.getText().toString(), Integer.parseInt(level
 				.getText().toString()), note.getText().toString(), spinner
 				.getSelectedItem().toString());
-		//Map timestamp = newRoom.getTime();
-		//newRoom.setTime(timestamp);
 		firebaseChild = firebaseRef.push();
 		//firebaseRef.push().setValue(newRoom);
 		firebaseChild.setValue(newRoom);
@@ -175,14 +179,35 @@ public class MainActivity extends ListActivity implements OnClickListener {
 			String childPath = splitUrl(firebaseChild.toString());
 			System.out.println("path: " + childPath);
 			firebaseRef.child(childPath).removeValue();
+			removeButton.setVisibility(View.INVISIBLE);
+			postButton.setVisibility(View.VISIBLE);
 		}
-		
-		
 	}
 	
 	private String splitUrl(String url){
 		String[] parts = url.split("\\/");
 		return parts[parts.length-1];
+	}
+	
+	private void startTimer(){
+		timer = new Timer();
+		initializeTimerTask();
+		timer.schedule(timerTask,1020000); //every 17 minutes.
+	}
+	
+	private void stopTimer(){
+		if(timer != null){
+			timer.cancel();
+			timer = null;
+		}
+	}
+	
+	private void initializeTimerTask(){
+		timerTask = new TimerTask(){
+			public void run(){
+				removeRoom();
+			}
+		};
 	}
 
 }

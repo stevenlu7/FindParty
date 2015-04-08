@@ -35,21 +35,14 @@ public class ChatListAdapter extends FirebaseListAdapter<Room> {
     @Override
     protected void populateView(View view, Room room) {
         // Map a Chat object to an entry in our listview
-    	//java.util.Date time = new java.util.Date(room.getTimeLong());
         String author = room.getUserName();
         TextView authorText = (TextView) view.findViewById(R.id.user);
         authorText.setText(author);
-        // If the message was sent by this user, color it differently
-       // if (author != null && author.equals(mUsername)) {
-        //    authorText.setTextColor(Color.RED);
-       // } else {
-        //    authorText.setTextColor(Color.BLUE);
-       // }
+
         ((TextView) view.findViewById(R.id.level)).setText(room.getLevel() + "");
         ((TextView) view.findViewById(R.id.note)).setText(room.getNote());
-        ((TextView) view.findViewById(R.id.gametype)).setText(room.getGametype());
-        
-        ((TextView) view.findViewById(R.id.timestamp)).setText(room.calculateTime(room.getTimeLong()) + " PST");
+        ((TextView) view.findViewById(R.id.gametype)).setText(room.getGametype());   
+        ((TextView) view.findViewById(R.id.timestamp)).setText(room.formatTime(room.getTimeLong()) + " PST");
     }
      
 }

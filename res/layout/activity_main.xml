@@ -19,6 +19,7 @@
         android:hint="@string/psnName"
         android:inputType="textShortMessage"
         android:lines="1"
+        android:maxLength="16"
         android:singleLine="true" />
 
     <EditText
@@ -44,15 +45,8 @@
         android:hint="@string/level"
         android:inputType="number"
         android:lines="1"
-        android:singleLine="true" />
-
-    <Button
-        android:id="@+id/createRoom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/note"
-        android:layout_below="@+id/note"
-        android:text="Post" />
+        android:singleLine="true"
+        android:maxLength="3" />
 
     <Spinner
         android:id="@+id/spinner"
@@ -71,48 +65,61 @@
         android:text="Gamertag"
         android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/createRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/note"
+        android:layout_below="@+id/note"
+        android:text="Post" />
+
     <ListView
         android:id="@android:id/list"
-        android:layout_width="300dp"
+        android:layout_width="325dp"
         android:layout_height="250dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/gametypeHeader" >
+        android:layout_alignLeft="@+id/createRoom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/time"
+        android:layout_below="@+id/createRoom"
+        android:layout_marginTop="22dp" >
+
     </ListView>
 
     <Button
         android:id="@+id/remove"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/levelHeader"
-        android:layout_alignRight="@+id/level"
-        android:text="Remove Post" 
-        android:visibility="invisible"/>
+        android:layout_above="@android:id/list"
+        android:layout_alignLeft="@+id/usernameHeader"
+        android:text="Remove Post"
+        android:visibility="invisible" />
 
     <TextView
-        android:id="@+id/gametypeHeader"
+        android:id="@+id/levelHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/remove"
-        android:layout_below="@+id/createRoom"
-        android:text="Gametype"
+        android:layout_below="@+id/remove"
+        android:layout_toLeftOf="@+id/level"
+        android:text="Level"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@android:id/list"
-        android:layout_alignParentRight="true"
+        android:layout_alignRight="@+id/note"
+        android:layout_below="@+id/remove"
         android:text="Time"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/levelHeader"
-        android:layout_width="wrap_content"
+        android:id="@+id/gametypeHeader"
+        android:layout_width="75dp"
         android:layout_height="wrap_content"
-        android:layout_above="@android:id/list"
-        android:layout_alignLeft="@+id/remove"
-        android:text="Level"
+        android:layout_alignBaseline="@+id/levelHeader"
+        android:layout_alignBottom="@+id/levelHeader"
+        android:layout_alignLeft="@+id/spinner"
+        android:text="Gametype"
         android:textStyle="bold" />
 
 </RelativeLayout>

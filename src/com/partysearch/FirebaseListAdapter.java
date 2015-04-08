@@ -63,7 +63,6 @@ public abstract class FirebaseListAdapter<T> extends BaseAdapter {
             	//System.out.println("key: " + dataSnapshot.getKey());
                 T model = dataSnapshot.getValue(FirebaseListAdapter.this.mModelClass);
                 //System.out.println("it is: " + model.toString());
-                Log.d("firebase adapter", "onChildAdded, after getValue");
                 mModelKeys.put(dataSnapshot.getKey(), model);
 
                 // Insert into the correct location, based on previousChildName

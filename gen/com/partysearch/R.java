@@ -27,21 +27,21 @@ public final class R {
     public static final class id {
         public static final int action_settings=0x7f080010;
         public static final int author=0x7f08000b;
-        public static final int createRoom=0x7f080004;
-        public static final int gametype=0x7f08000e;
-        public static final int gametypeHeader=0x7f080008;
+        public static final int createRoom=0x7f080007;
+        public static final int gametype=0x7f08000f;
+        public static final int gametypeHeader=0x7f08000a;
         public static final int layout=0x7f080000;
         public static final int level=0x7f080003;
-        public static final int levelHeader=0x7f080007;
+        public static final int levelHeader=0x7f080006;
         public static final int message=0x7f08000c;
         public static final int note=0x7f080002;
         public static final int psnInput=0x7f080001;
         public static final int remove=0x7f080009;
-        public static final int spinner=0x7f080005;
-        public static final int time=0x7f08000a;
-        public static final int timestamp=0x7f08000f;
+        public static final int spinner=0x7f080004;
+        public static final int time=0x7f080008;
+        public static final int timestamp=0x7f08000e;
         public static final int user=0x7f08000d;
-        public static final int usernameHeader=0x7f080006;
+        public static final int usernameHeader=0x7f080005;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -81,10 +81,13 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f060003;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f060004;
+        public static final int Theme_Default=0x7f060000;
+        public static final int Theme_FullScreen=0x7f060002;
+        public static final int Theme_NoTitle=0x7f060001;
     }
 }

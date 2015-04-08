@@ -59,7 +59,7 @@ public class Room {
         this.time = time;
     }
     
-    public String calculateTime(long time){
+    public String formatTime(long time){
     	SimpleDateFormat dateFormat = new SimpleDateFormat( "HH:mm" );
     	Calendar cal = Calendar.getInstance();
     	cal.setTimeInMillis(time);
