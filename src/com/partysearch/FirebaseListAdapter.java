@@ -59,25 +59,23 @@ public abstract class FirebaseListAdapter<T> extends BaseAdapter {
         mListener = this.mRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
-            	Log.d("firebase adapter", "onChildAdded");
-            	//System.out.println("key: " + dataSnapshot.getKey());
+            	Log.d("firebase adapter", "onChildAdded");         	
                 T model = dataSnapshot.getValue(FirebaseListAdapter.this.mModelClass);
-                //System.out.println("it is: " + model.toString());
                 mModelKeys.put(dataSnapshot.getKey(), model);
 
                 // Insert into the correct location, based on previousChildName
-                if (previousChildName == null) {
+               // if (previousChildName == null) {
                     mModels.add(0, model);
-                } else {
-                    T previousModel = mModelKeys.get(previousChildName);
-                    int previousIndex = mModels.indexOf(previousModel);
-                    int nextIndex = previousIndex + 1;
-                    if (nextIndex == mModels.size()) {
-                        mModels.add(model);
-                    } else {
-                        mModels.add(nextIndex, model);
-                    }
-                }
+                //} else {
+                 //   T previousModel = mModelKeys.get(previousChildName);
+                 //   int previousIndex = mModels.indexOf(previousModel);
+                 //   int nextIndex = previousIndex + 1;
+                  //  if (nextIndex == mModels.size()) {
+                  //      mModels.add(model);
+                  //  } else {
+                  //      mModels.add(nextIndex, model);
+                  //  }
+               // }
 
                 notifyDataSetChanged();
             }

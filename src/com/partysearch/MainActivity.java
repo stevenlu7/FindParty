@@ -53,7 +53,7 @@ public class MainActivity extends ListActivity implements OnClickListener {
 		setContentView(R.layout.activity_main);
 		Firebase.setAndroidContext(this);
 
-		setTitle("Chatting as " + mUsername);
+		//setTitle("Chatting as " + mUsername);
 		psnName = (EditText) findViewById(R.id.psnInput);
 		level = (EditText) findViewById(R.id.level);
 		note = (EditText) findViewById(R.id.note);
@@ -99,7 +99,7 @@ public class MainActivity extends ListActivity implements OnClickListener {
 		// data changes
 		// final ListView listView = getListView();
 		// Tell our list adapter that we only want 50 messages at a time
-		mChatListAdapter = new ChatListAdapter(firebaseRef.limit(50), this,
+		mChatListAdapter = new ChatListAdapter(firebaseRef.limit(40), this,
 				R.layout.room_info, psnName.getText().toString());
 		listView.setAdapter(mChatListAdapter);
 		mChatListAdapter.registerDataSetObserver(new DataSetObserver() {
@@ -175,10 +175,11 @@ public class MainActivity extends ListActivity implements OnClickListener {
 	}
 
 	private void removeRoom() {
-		if(!firebaseChild.equals(FIREBASE_URL)){
+		if(!firebaseChild.toString().equals(FIREBASE_URL)){
 			String childPath = splitUrl(firebaseChild.toString());
 			System.out.println("path: " + childPath);
 			firebaseRef.child(childPath).removeValue();
+			stopTimer();
 			removeButton.setVisibility(View.INVISIBLE);
 			postButton.setVisibility(View.VISIBLE);
 		}
