@@ -4,6 +4,7 @@ import android.app.ListActivity;
 import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -43,9 +44,8 @@ public class MainActivity extends ListActivity implements OnClickListener {
 	private Spinner spinner;
 	private Button removeButton;
 	private Button postButton;
-	
-	private Timer timer;
-	private TimerTask timerTask;
+
+	private Handler handler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class MainActivity extends ListActivity implements OnClickListener {
 		setContentView(R.layout.activity_main);
 		Firebase.setAndroidContext(this);
 
-		//setTitle("Chatting as " + mUsername);
+		// setTitle("Chatting as " + mUsername);
 		psnName = (EditText) findViewById(R.id.psnInput);
 		level = (EditText) findViewById(R.id.level);
 		note = (EditText) findViewById(R.id.note);
@@ -65,11 +65,13 @@ public class MainActivity extends ListActivity implements OnClickListener {
 		postButton = (Button) findViewById(R.id.createRoom);
 		postButton.setOnClickListener(this);
 		removeButton.setOnClickListener(this);
+		
+		handler = new Handler();
 
 		// Setup our Firebase mFirebaseRef
 		firebaseRef = new Firebase(FIREBASE_URL).child("chat");
 		firebaseChild = new Firebase(FIREBASE_URL);
-		
+
 		populateSpinner();
 
 	}
@@ -81,13 +83,12 @@ public class MainActivity extends ListActivity implements OnClickListener {
 			makeRoom();
 			removeButton.setVisibility(View.VISIBLE);
 			postButton.setVisibility(View.INVISIBLE);
-			startTimer();
+			handler.postDelayed(runnable, 1020000); //remove room after 17 mins
 			break;
 		case R.id.remove:
 			removeRoom();
 			removeButton.setVisibility(View.INVISIBLE);
 			postButton.setVisibility(View.VISIBLE);
-			stopTimer();
 			break;
 		}
 	}
@@ -134,7 +135,6 @@ public class MainActivity extends ListActivity implements OnClickListener {
 				});
 	}
 
-	
 	@Override
 	public void onStop() {
 		super.onStop();
@@ -158,15 +158,15 @@ public class MainActivity extends ListActivity implements OnClickListener {
 	}
 
 	private void makeRoom() {
-		
+
 		// Firebase(FIREBASE_URL).child(psnName.getText().toString());
 		newRoom = new Room(psnName.getText().toString(), Integer.parseInt(level
 				.getText().toString()), note.getText().toString(), spinner
 				.getSelectedItem().toString());
 		firebaseChild = firebaseRef.push();
-		//firebaseRef.push().setValue(newRoom);
+		// firebaseRef.push().setValue(newRoom);
 		firebaseChild.setValue(newRoom);
-		
+
 		// firebaseRef.child("userName").setValue(newRoom.getUserName());
 		// firebaseRef.child("level").setValue(newRoom.getLevel());
 		// firebaseRef.child("note").setValue(newRoom.getNote());
@@ -175,40 +175,25 @@ public class MainActivity extends ListActivity implements OnClickListener {
 	}
 
 	private void removeRoom() {
-		if(!firebaseChild.toString().equals(FIREBASE_URL)){
+		if (!firebaseChild.toString().equals(FIREBASE_URL)) {
 			String childPath = splitUrl(firebaseChild.toString());
-			System.out.println("path: " + childPath);
+			//System.out.println("path: " + childPath);
 			firebaseRef.child(childPath).removeValue();
-			stopTimer();
 			removeButton.setVisibility(View.INVISIBLE);
-			postButton.setVisibility(View.VISIBLE);
+			postButton.setVisibility(View.VISIBLE);	
 		}
 	}
-	
-	private String splitUrl(String url){
+
+	private String splitUrl(String url) {
 		String[] parts = url.split("\\/");
-		return parts[parts.length-1];
+		return parts[parts.length - 1];
 	}
-	
-	private void startTimer(){
-		timer = new Timer();
-		initializeTimerTask();
-		timer.schedule(timerTask,1020000); //every 17 minutes.
-	}
-	
-	private void stopTimer(){
-		if(timer != null){
-			timer.cancel();
-			timer = null;
+
+	private Runnable runnable = new Runnable() {
+		@Override
+		public void run() {
+			removeRoom();
 		}
-	}
-	
-	private void initializeTimerTask(){
-		timerTask = new TimerTask(){
-			public void run(){
-				removeRoom();
-			}
-		};
-	}
+	};
 
 }
