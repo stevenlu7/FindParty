@@ -17,17 +17,19 @@ public class Room {
 	private String note;
 	private String gametype;
 	private Long time;
+	private String console;
 	
     // Required default constructor for Firebase object mapping
     @SuppressWarnings("unused")
     private Room() {
     }
 	
-	public Room(String userName, int level, String note, String gametype){
+	public Room(String userName, int level, String note, String gametype, String console){
 		this.userName = userName;
 		this.level = level;
 		this.note = note;
 		this.gametype = gametype;
+		this.console = console;
 	}
 	
 	public String getUserName(){
@@ -57,6 +59,10 @@ public class Room {
 
     public void setTime(Long time) {
         this.time = time;
+    }
+    
+    public String getConsole(){
+    	return console;
     }
     
     public String formatTime(long time){

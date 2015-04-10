@@ -41,7 +41,8 @@ public class ChatListAdapter extends FirebaseListAdapter<Room> {
 
         ((TextView) view.findViewById(R.id.level)).setText(room.getLevel() + "");
         ((TextView) view.findViewById(R.id.note)).setText(room.getNote());
-        ((TextView) view.findViewById(R.id.gametype)).setText(room.getGametype());   
+        ((TextView) view.findViewById(R.id.gametype)).setText(room.getGametype()); 
+        ((TextView) view.findViewById(R.id.console)).setText(room.getConsole());   
         ((TextView) view.findViewById(R.id.timestamp)).setText(room.formatTime(room.getTimeLong()) + " PST");
     }
      

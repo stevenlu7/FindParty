@@ -11,7 +11,7 @@
 
     <EditText
         android:id="@+id/psnInput"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -24,27 +24,14 @@
 
     <EditText
         android:id="@+id/note"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
+        android:layout_width="500dp"
+        android:layout_height="50dp"
         android:layout_alignLeft="@+id/psnInput"
         android:layout_below="@+id/level"
-        android:gravity="top|left"
-        android:hint="@string/note"
-        android:lines="3" 
-        android:inputType="textShortMessage" />
-
-    <EditText
-        android:id="@+id/level"
-        android:layout_width="75dp"
-        android:layout_height="50dp"
-        android:layout_alignBaseline="@+id/psnInput"
-        android:layout_alignBottom="@+id/psnInput"
-        android:layout_toRightOf="@+id/psnInput"
         android:ems="10"
-        android:hint="@string/level"
-        android:inputType="number"
+        android:hint="@string/note"
+        android:inputType="textShortMessage"
         android:lines="1"
-        android:maxLength="3"
         android:singleLine="true" />
 
     <Spinner
@@ -54,47 +41,51 @@
         android:layout_above="@+id/note"
         android:layout_alignParentRight="true" />
 
-    <Button
-        android:id="@+id/remove"
+    <TextView
+        android:id="@+id/usernameHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@android:id/list"
-        android:layout_alignRight="@android:id/list"
-        android:layout_marginBottom="15dp"
-        android:text="Remove Post"
-        android:visibility="invisible" />
-
-    <Spinner
-        android:id="@+id/spinner02"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/level" />
+        android:layout_alignBaseline="@+id/levelHeader"
+        android:layout_alignBottom="@+id/levelHeader"
+        android:layout_alignLeft="@android:id/list"
+        android:text="Gamertag"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/createRoom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/remove"
-        android:layout_below="@+id/spinner02"
+        android:layout_alignLeft="@+id/note"
+        android:layout_below="@+id/note"
         android:text="Post" />
 
     <ListView
         android:id="@android:id/list"
-        android:layout_width="325dp"
+        android:layout_width="350dp"
         android:layout_height="250dp"
-        android:layout_alignLeft="@+id/usernameHeader"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/usernameHeader" >
+        android:layout_alignLeft="@+id/createRoom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/time"
+        android:layout_below="@+id/createRoom"
+        android:layout_marginTop="22dp" >
 
     </ListView>
+
+    <Button
+        android:id="@+id/remove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@android:id/list"
+        android:layout_alignLeft="@+id/usernameHeader"
+        android:text="Remove Post"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/remove"
-        android:layout_below="@+id/note"
+        android:layout_alignRight="@+id/note"
+        android:layout_below="@+id/remove"
         android:text="Time"
         android:textStyle="bold" />
 
@@ -102,9 +93,9 @@
         android:id="@+id/gametypeHeader"
         android:layout_width="75dp"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/levelHeader"
-        android:layout_alignBottom="@+id/levelHeader"
-        android:layout_toLeftOf="@+id/remove"
+        android:layout_alignBaseline="@+id/usernameHeader"
+        android:layout_alignBottom="@+id/usernameHeader"
+        android:layout_toRightOf="@+id/remove"
         android:text="Gametype"
         android:textStyle="bold" />
 
@@ -114,18 +105,44 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/time"
         android:layout_alignBottom="@+id/time"
-        android:layout_alignLeft="@+id/spinner02"
+        android:layout_marginLeft="14dp"
+        android:layout_toRightOf="@+id/gametypeHeader"
         android:text="Level"
         android:textStyle="bold" />
 
+    <EditText
+        android:id="@+id/level"
+        android:layout_width="75dp"
+        android:layout_height="50dp"
+        android:layout_alignBaseline="@+id/psnInput"
+        android:layout_alignBottom="@+id/psnInput"
+        android:layout_alignLeft="@+id/levelHeader"
+        android:ems="10"
+        android:hint="@string/level"
+        android:inputType="number"
+        android:lines="1"
+        android:maxLength="3"
+        android:singleLine="true" >
+
+        <requestFocus />
+    </EditText>
+
+    <Spinner
+        android:id="@+id/spinner02"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/note"
+        android:layout_toRightOf="@+id/level" />
+
     <TextView
-        android:id="@+id/usernameHeader"
+        android:id="@+id/consoleHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/gametypeHeader"
-        android:layout_alignBottom="@+id/gametypeHeader"
-        android:layout_alignLeft="@+id/note"
-        android:text="Gamertag"
+        android:layout_alignBaseline="@+id/levelHeader"
+        android:layout_alignBottom="@+id/levelHeader"
+        android:layout_alignLeft="@+id/spinner02"
+        android:layout_marginLeft="15dp"
+        android:text="Console"
         android:textStyle="bold" />
 
 </RelativeLayout>

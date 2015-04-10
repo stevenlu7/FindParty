@@ -4,8 +4,8 @@
     <string name="app_name">PartySearch</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="psnName">PSN Name</string>
+    <string name="psnName">Gamertag</string>
     <string name="level">Level</string>
-	<string name="note">Ex: Looking for 3 more players</string>
+	<string name="note">Ex: Looking for 3 \n more players on PS4</string>
 
 </resources>
