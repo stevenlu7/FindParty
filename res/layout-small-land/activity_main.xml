@@ -20,18 +20,8 @@
         android:inputType="textShortMessage"
         android:lines="1"
         android:maxLength="16"
-        android:singleLine="true" />
-
-    <EditText
-        android:id="@+id/note"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
-        android:layout_alignLeft="@+id/psnInput"
-        android:layout_below="@+id/level"
-        android:gravity="top|left"
-        android:hint="@string/note"
-        android:inputType="textShortMessage"
-        android:lines="3" />
+        android:singleLine="true"
+        android:imeOptions="flagNoExtractUi" />
 
     <EditText
         android:id="@+id/level"
@@ -45,7 +35,8 @@
         android:inputType="number"
         android:lines="1"
         android:maxLength="3"
-        android:singleLine="true" />
+        android:singleLine="true" 
+        android:imeOptions="flagNoExtractUi"/>
 
     <Spinner
         android:id="@+id/spinner"
@@ -127,5 +118,33 @@
         android:layout_alignLeft="@+id/note"
         android:text="@string/gamertag"
         android:textStyle="bold" />
+    
+     <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id"
+        android:visibility="invisible">
+    </com.google.android.gms.ads.AdView>
+
+     <EditText
+         android:id="@+id/note"
+         android:layout_width="200dp"
+         android:layout_height="100dp"
+         android:layout_alignLeft="@+id/psnInput"
+         android:layout_alignTop="@+id/spinner02"
+         android:ems="10"
+         android:gravity="top|left"
+         android:hint="@string/note"
+         android:imeOptions="flagNoExtractUi"
+         android:inputType="textShortMessage"
+         android:lines="3" >
+
+         <requestFocus />
+     </EditText>
 
 </RelativeLayout>

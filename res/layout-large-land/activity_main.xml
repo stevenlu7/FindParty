@@ -9,6 +9,17 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.findparty.MainActivity" >
 
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id" >
+    </com.google.android.gms.ads.AdView>
+    
     <EditText
         android:id="@+id/psnInput"
         android:layout_width="150dp"
@@ -35,12 +46,12 @@
 
     <ListView
         android:id="@android:id/list"
-        android:layout_width="325dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/usernameHeader"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/usernameHeader" >
-
+        android:layout_below="@+id/usernameHeader"
+        android:layout_above="@+id/adView" >
     </ListView>
 
     <TextView

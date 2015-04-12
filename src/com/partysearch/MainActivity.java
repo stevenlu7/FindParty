@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.RotateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,16 +22,16 @@ import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.ads.*;
 
 public class MainActivity extends ListActivity implements OnClickListener {
 
 	private static final String FIREBASE_URL = "https://blistering-heat-2311.firebaseio.com";
 
-	private String mUsername;
 	private Firebase firebaseRef;
 	private Firebase firebaseChild;
 	private ValueEventListener mConnectedListener;
@@ -54,7 +55,6 @@ public class MainActivity extends ListActivity implements OnClickListener {
 		setContentView(R.layout.activity_main);
 		Firebase.setAndroidContext(this);
 
-		// setTitle("Chatting as " + mUsername);
 		psnName = (EditText) findViewById(R.id.psnInput);
 		level = (EditText) findViewById(R.id.level);
 		note = (EditText) findViewById(R.id.note);
@@ -68,12 +68,12 @@ public class MainActivity extends ListActivity implements OnClickListener {
 		removeButton.setOnClickListener(this);
 
 		handler = new Handler();
+		populateSpinner();
+		loadAd();
 
 		// Setup our Firebase mFirebaseRef
 		firebaseRef = new Firebase(FIREBASE_URL).child("chat");
 		firebaseChild = new Firebase(FIREBASE_URL);
-
-		populateSpinner();
 
 	}
 
@@ -81,15 +81,16 @@ public class MainActivity extends ListActivity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.createRoom:
-			if(psnName.getText().toString().equals("")
+			if (psnName.getText().toString().equals("")
 					|| level.getText().toString().equals("")) {
 				Toast.makeText(getApplicationContext(),
 						"Missing Gamertag/level", Toast.LENGTH_SHORT).show();
-			}else{
+			} else {
 				makeRoom();
 				removeButton.setVisibility(View.VISIBLE);
 				postButton.setVisibility(View.INVISIBLE);
-				handler.postDelayed(runnable, 1020000); // remove room after 17 mins
+				handler.postDelayed(runnable, 1020000); // remove room after 17
+														// mins
 			}
 			break;
 		case R.id.remove:
@@ -125,12 +126,10 @@ public class MainActivity extends ListActivity implements OnClickListener {
 					public void onDataChange(DataSnapshot dataSnapshot) {
 						boolean connected = (Boolean) dataSnapshot.getValue();
 						if (connected) {
-							Toast.makeText(MainActivity.this,
-									"Connected", Toast.LENGTH_SHORT)
-									.show();
+							Toast.makeText(MainActivity.this, "Connected",
+									Toast.LENGTH_SHORT).show();
 						} else {
-							Toast.makeText(MainActivity.this,
-									"Disconnected",
+							Toast.makeText(MainActivity.this, "Disconnected",
 									Toast.LENGTH_SHORT).show();
 						}
 					}
@@ -148,7 +147,17 @@ public class MainActivity extends ListActivity implements OnClickListener {
 		firebaseRef.getRoot().child(".info/connected")
 				.removeEventListener(mConnectedListener);
 		mChatListAdapter.cleanup();
-		//removeRoom();
+		removeRoom();
+	}
+
+	private void loadAd() {
+		boolean smallSize = getResources().getBoolean(R.bool.isSmall);
+		if (!smallSize) {
+			System.out.println("lol");
+			AdView mAdView = (AdView) findViewById(R.id.adView);
+			AdRequest adRequest = new AdRequest.Builder().build();
+			mAdView.loadAd(adRequest);
+		}
 	}
 
 	private void populateSpinner() {
@@ -158,47 +167,40 @@ public class MainActivity extends ListActivity implements OnClickListener {
 		list.add("Supply Raid");
 		list.add("Interrogation");
 		list.add("Survivors");
-		
+
 		List<String> consoleList = new ArrayList<String>();
 		consoleList.add("PS4");
 		consoleList.add("PS3");
-		
+
 		ArrayAdapter<String> gametypeAdapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, list);
 		gametypeAdapter
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		
+
 		ArrayAdapter<String> consoleAdapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, consoleList);
 		gametypeAdapter
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		
+
 		gametypeSpinner.setAdapter(gametypeAdapter);
 		consoleSpinner.setAdapter(consoleAdapter);
 	}
 
 	private void makeRoom() {
-
-		// Firebase(FIREBASE_URL).child(psnName.getText().toString());
 		newRoom = new Room(psnName.getText().toString(), Integer.parseInt(level
-				.getText().toString()), note.getText().toString(), gametypeSpinner
-				.getSelectedItem().toString(), consoleSpinner.getSelectedItem().toString());
+				.getText().toString()), note.getText().toString(),
+				gametypeSpinner.getSelectedItem().toString(), consoleSpinner
+						.getSelectedItem().toString());
 		firebaseChild = firebaseRef.push();
 		// firebaseRef.push().setValue(newRoom);
 		firebaseChild.setValue(newRoom);
 
-		// firebaseRef.child("userName").setValue(newRoom.getUserName());
-		// firebaseRef.child("level").setValue(newRoom.getLevel());
-		// firebaseRef.child("note").setValue(newRoom.getNote());
-		// /firebaseRef.child("gametype").setValue(newRoom.getGametype());
-		listView.setSelectionAfterHeaderView();
-
+		listView.setSelectionAfterHeaderView(); // scroll to top
 	}
 
 	private void removeRoom() {
 		if (!firebaseChild.toString().equals(FIREBASE_URL)) {
 			String childPath = splitUrl(firebaseChild.toString());
-			// System.out.println("path: " + childPath);
 			firebaseRef.child(childPath).removeValue();
 			removeButton.setVisibility(View.INVISIBLE);
 			postButton.setVisibility(View.VISIBLE);
@@ -216,5 +218,4 @@ public class MainActivity extends ListActivity implements OnClickListener {
 			removeRoom();
 		}
 	};
-
 }
