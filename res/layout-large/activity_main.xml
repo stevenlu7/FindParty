@@ -98,7 +98,7 @@
         android:layout_toLeftOf="@+id/spinner02"
         android:text="Console"
         android:textStyle="bold" 
-        android:layout_marginRight="80dp"/>
+        android:layout_marginRight="10dp"/>
 
     <TextView
         android:id="@+id/gametypeHeader"
@@ -119,7 +119,8 @@
         android:layout_alignBottom="@+id/time"
         android:layout_alignRight="@+id/note"
         android:text="@string/level"
-        android:textStyle="bold" />
+        android:textStyle="bold" 
+        android:layout_marginRight="50dp"/>
 
     <Spinner
         android:id="@+id/spinner"
@@ -127,7 +128,7 @@
         android:layout_height="50dp"
         android:layout_above="@+id/note"
         android:layout_toLeftOf="@+id/spinner02" 
-        android:layout_marginRight="100dp"/>
+        android:layout_marginRight="10dp"/>
 
     <EditText
         android:id="@+id/level"
@@ -142,7 +143,7 @@
         android:lines="1"
         android:maxLength="3"
         android:singleLine="true" 
-        android:layout_marginLeft="100dp">
+        android:layout_marginLeft="30dp">
 
         <requestFocus />
     </EditText>

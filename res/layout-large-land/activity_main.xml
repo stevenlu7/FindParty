@@ -36,7 +36,7 @@
     <ListView
         android:id="@android:id/list"
         android:layout_width="325dp"
-        android:layout_height="250dp"
+        android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/usernameHeader"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/usernameHeader" >
@@ -78,48 +78,6 @@
         android:layout_above="@+id/note"
         android:layout_alignParentRight="true" />
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="170dp"
-        android:layout_height="50dp"
-        android:layout_above="@+id/note"
-        android:layout_toLeftOf="@+id/spinner02" 
-        android:layout_marginRight="170dp"/>
-
-    <EditText
-        android:id="@+id/level"
-        android:layout_width="75dp"
-        android:layout_height="50dp"
-        android:layout_alignBaseline="@+id/psnInput"
-        android:layout_alignBottom="@+id/psnInput"
-        android:layout_centerHorizontal="true"
-        android:ems="10"
-        android:hint="@string/level"
-        android:inputType="number"
-        android:lines="1"
-        android:maxLength="3"
-        android:singleLine="true" />
-
-    <TextView
-        android:id="@+id/levelHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/level"
-        android:layout_below="@+id/note"
-        android:text="@string/level"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/gametypeHeader"
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/levelHeader"
-        android:layout_alignBottom="@+id/levelHeader"
-        android:layout_toLeftOf="@+id/levelHeader"
-        android:text="@string/gametype"
-        android:textStyle="bold" 
-        android:layout_marginRight="170dp"/>
-
     <Button
         android:id="@+id/remove"
         android:layout_width="wrap_content"
@@ -139,6 +97,52 @@
         android:layout_toLeftOf="@+id/spinner02"
         android:text="Console"
         android:textStyle="bold" 
-        android:layout_marginRight="80dp"/>
+        android:layout_marginRight="75dp"/>
+
+    <EditText
+        android:id="@+id/level"
+        android:layout_width="75dp"
+        android:layout_height="50dp"
+        android:layout_alignBaseline="@+id/psnInput"
+        android:layout_alignBottom="@+id/psnInput"
+        android:layout_marginLeft="52dp"
+        android:layout_toRightOf="@+id/psnInput"
+        android:ems="10"
+        android:hint="@string/level"
+        android:inputType="number"
+        android:lines="1"
+        android:maxLength="3"
+        android:singleLine="true" >
+
+        <requestFocus />
+    </EditText>
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/note"
+        android:layout_alignRight="@+id/console" />
+
+    <TextView
+        android:id="@+id/gametypeHeader"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/levelHeader"
+        android:layout_alignBottom="@+id/levelHeader"
+        android:layout_marginLeft="75dp"
+        android:layout_toRightOf="@+id/psnInput"
+        android:text="@string/gametype"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/levelHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/time"
+        android:layout_alignBottom="@+id/time"
+        android:layout_alignLeft="@+id/spinner"
+        android:text="@string/level"
+        android:textStyle="bold" />
 
 </RelativeLayout>
