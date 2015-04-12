@@ -30,8 +30,8 @@
         android:layout_below="@+id/level"
         android:gravity="top|left"
         android:hint="@string/note"
-        android:lines="3" 
-        android:inputType="textShortMessage" />
+        android:inputType="textShortMessage"
+        android:lines="3" />
 
     <EditText
         android:id="@+id/level"
@@ -49,6 +49,7 @@
 
     <Spinner
         android:id="@+id/spinner"
+        style="@style/SpinnerAppTheme"
         android:layout_width="120dp"
         android:layout_height="50dp"
         android:layout_above="@+id/note"
@@ -61,7 +62,7 @@
         android:layout_above="@android:id/list"
         android:layout_alignRight="@android:id/list"
         android:layout_marginBottom="15dp"
-        android:text="Remove Post"
+        android:text="@string/remove"
         android:visibility="invisible" />
 
     <Spinner
@@ -77,16 +78,15 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/remove"
         android:layout_below="@+id/spinner02"
-        android:text="Post" />
+        android:text="@string/post" />
 
     <ListView
         android:id="@android:id/list"
         android:layout_width="325dp"
-        android:layout_height="250dp"
+        android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/usernameHeader"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/usernameHeader" >
-
     </ListView>
 
     <TextView
@@ -95,7 +95,7 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/remove"
         android:layout_below="@+id/note"
-        android:text="Time"
+        android:text="@string/time"
         android:textStyle="bold" />
 
     <TextView
@@ -105,7 +105,7 @@
         android:layout_alignBaseline="@+id/levelHeader"
         android:layout_alignBottom="@+id/levelHeader"
         android:layout_toLeftOf="@+id/remove"
-        android:text="Gametype"
+        android:text="@string/gametype"
         android:textStyle="bold" />
 
     <TextView
@@ -115,7 +115,7 @@
         android:layout_alignBaseline="@+id/time"
         android:layout_alignBottom="@+id/time"
         android:layout_alignLeft="@+id/spinner02"
-        android:text="Level"
+        android:text="@string/level"
         android:textStyle="bold" />
 
     <TextView
@@ -125,7 +125,7 @@
         android:layout_alignBaseline="@+id/gametypeHeader"
         android:layout_alignBottom="@+id/gametypeHeader"
         android:layout_alignLeft="@+id/note"
-        android:text="Gamertag"
+        android:text="@string/gamertag"
         android:textStyle="bold" />
 
 </RelativeLayout>

@@ -148,7 +148,7 @@ public class MainActivity extends ListActivity implements OnClickListener {
 		firebaseRef.getRoot().child(".info/connected")
 				.removeEventListener(mConnectedListener);
 		mChatListAdapter.cleanup();
-		removeRoom();
+		//removeRoom();
 	}
 
 	private void populateSpinner() {
@@ -191,6 +191,7 @@ public class MainActivity extends ListActivity implements OnClickListener {
 		// firebaseRef.child("level").setValue(newRoom.getLevel());
 		// firebaseRef.child("note").setValue(newRoom.getNote());
 		// /firebaseRef.child("gametype").setValue(newRoom.getGametype());
+		listView.setSelectionAfterHeaderView();
 
 	}
 

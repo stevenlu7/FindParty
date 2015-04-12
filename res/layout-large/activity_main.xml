@@ -1,4 +1,4 @@
-<!--  2 -->
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout"
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/remove"
         android:layout_below="@+id/note"
-        android:text="Time"
+       android:text="@string/time"
         android:textStyle="bold" />
 
     <TextView
@@ -60,7 +60,7 @@
         android:layout_alignBaseline="@+id/gametypeHeader"
         android:layout_alignBottom="@+id/gametypeHeader"
         android:layout_alignLeft="@+id/note"
-        android:text="Gamertag"
+        android:text="@string/gamertag"
         android:textStyle="bold" />
 
     <Button
@@ -70,7 +70,7 @@
         android:layout_alignBottom="@+id/note"
         android:layout_alignRight="@+id/remove"
         android:layout_marginBottom="24dp"
-        android:text="Post" />
+        android:text="@string/post" />
 
     <Spinner
         android:id="@+id/spinner02"
@@ -86,7 +86,7 @@
         android:layout_alignBaseline="@+id/createRoom"
         android:layout_alignBottom="@+id/createRoom"
         android:layout_alignRight="@+id/spinner02"
-        android:text="Remove Post"
+        android:text="@string/remove"
         android:visibility="invisible" />
 
     <TextView
@@ -108,7 +108,7 @@
         android:layout_alignBottom="@+id/levelHeader"
         android:layout_marginLeft="24dp"
         android:layout_toRightOf="@+id/psnInput"
-        android:text="Gametype"
+        android:text="@string/gametype"
         android:textStyle="bold" />
 
     <TextView
@@ -118,7 +118,7 @@
         android:layout_alignBaseline="@+id/time"
         android:layout_alignBottom="@+id/time"
         android:layout_alignRight="@+id/note"
-        android:text="Level"
+        android:text="@string/level"
         android:textStyle="bold" />
 
     <Spinner

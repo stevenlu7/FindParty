@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="horizontal" >
-<!--  1 -->
+
     <TextView
         android:id="@+id/user"
         android:layout_width="fill_parent"

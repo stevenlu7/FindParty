@@ -17,8 +17,8 @@
         <activity
             android:windowSoftInputMode="adjustPan|stateHidden"
             android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.NoTitle" >
+            android:label="@string/app_name" 
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
