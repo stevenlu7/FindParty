@@ -445,6 +445,7 @@ containing a value of this type.
          */
         public static final int activity_horizontal_margin=0x7f0a0000;
         public static final int activity_vertical_margin=0x7f0a0001;
+        public static final int text_size=0x7f0a0002;
     }
     public static final class drawable {
         public static final int apptheme_activated_background_holo_dark=0x7f020000;
