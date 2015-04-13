@@ -107,21 +107,6 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/psnInput"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_alignLeft="@+id/adView"
-        android:layout_alignTop="@+id/adView"
-        android:layout_marginTop="35dp"
-        android:ems="10"
-        android:hint="@string/psnName"
-        android:imeOptions="flagNoExtractUi"
-        android:inputType="textShortMessage"
-        android:lines="1"
-        android:maxLength="16"
-        android:singleLine="true" />
-
-    <EditText
         android:id="@+id/level"
         android:layout_width="75dp"
         android:layout_height="50dp"
@@ -154,5 +139,19 @@
         android:layout_toRightOf="@+id/levelHeader"
         android:text="Console"
         android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/psnInput"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_alignLeft="@+id/adView"
+        android:layout_below="@+id/adView"
+        android:ems="10"
+        android:hint="@string/psnName"
+        android:imeOptions="flagNoExtractUi"
+        android:inputType="textShortMessage"
+        android:lines="1"
+        android:maxLength="16"
+        android:singleLine="true" />
 
 </RelativeLayout>

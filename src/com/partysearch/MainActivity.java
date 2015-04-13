@@ -1,6 +1,7 @@
 package com.partysearch;
 
 import android.app.ListActivity;
+import android.content.res.Configuration;
 import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class MainActivity extends ListActivity implements OnClickListener {
 
 	private static final String FIREBASE_URL = "https://blistering-heat-2311.firebaseio.com";
 
+	private boolean roomRemoved;
 	private Firebase firebaseRef;
 	private Firebase firebaseChild;
 	private ValueEventListener mConnectedListener;
@@ -53,8 +55,8 @@ public class MainActivity extends ListActivity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		Firebase.setAndroidContext(this);
 
+		roomRemoved = false;
 		psnName = (EditText) findViewById(R.id.psnInput);
 		level = (EditText) findViewById(R.id.level);
 		note = (EditText) findViewById(R.id.note);
@@ -69,11 +71,17 @@ public class MainActivity extends ListActivity implements OnClickListener {
 
 		handler = new Handler();
 		populateSpinner();
-		loadAd();
+		//loadAd();
 
 		// Setup our Firebase mFirebaseRef
 		firebaseRef = new Firebase(FIREBASE_URL).child("chat");
 		firebaseChild = new Firebase(FIREBASE_URL);
+		
+		if(savedInstanceState != null){
+			removeButton.setVisibility(savedInstanceState.getInt("remove"));
+			postButton.setVisibility(savedInstanceState.getInt("post"));
+			firebaseChild = new Firebase(savedInstanceState.getString("url"));
+		}
 
 	}
 
@@ -90,7 +98,7 @@ public class MainActivity extends ListActivity implements OnClickListener {
 				removeButton.setVisibility(View.VISIBLE);
 				postButton.setVisibility(View.INVISIBLE);
 				handler.postDelayed(runnable, 1020000); // remove room after 17
-														// mins
+														// mins 
 			}
 			break;
 		case R.id.remove:
@@ -147,13 +155,27 @@ public class MainActivity extends ListActivity implements OnClickListener {
 		firebaseRef.getRoot().child(".info/connected")
 				.removeEventListener(mConnectedListener);
 		mChatListAdapter.cleanup();
-		removeRoom();
+		Firebase.goOffline();
+		//removeRoom();
 	}
 
+	@Override
+	public void onResume(){
+		super.onResume();
+		Firebase.goOnline();
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+	    super.onSaveInstanceState(savedInstanceState);
+	    savedInstanceState.putInt("remove", removeButton.getVisibility());
+	    savedInstanceState.putInt("post", postButton.getVisibility());
+	    savedInstanceState.putString("url", firebaseChild.toString());
+	}
+	
 	private void loadAd() {
 		boolean smallSize = getResources().getBoolean(R.bool.isSmall);
 		if (!smallSize) {
-			System.out.println("lol");
 			AdView mAdView = (AdView) findViewById(R.id.adView);
 			AdRequest adRequest = new AdRequest.Builder().build();
 			mAdView.loadAd(adRequest);
@@ -195,7 +217,8 @@ public class MainActivity extends ListActivity implements OnClickListener {
 		// firebaseRef.push().setValue(newRoom);
 		firebaseChild.setValue(newRoom);
 
-		listView.setSelectionAfterHeaderView(); // scroll to top
+		roomRemoved = false;
+		//listView.setSelectionAfterHeaderView(); // scroll to top
 	}
 
 	private void removeRoom() {
@@ -204,6 +227,7 @@ public class MainActivity extends ListActivity implements OnClickListener {
 			firebaseRef.child(childPath).removeValue();
 			removeButton.setVisibility(View.INVISIBLE);
 			postButton.setVisibility(View.VISIBLE);
+			roomRemoved = true;
 		}
 	}
 
@@ -215,7 +239,8 @@ public class MainActivity extends ListActivity implements OnClickListener {
 	private Runnable runnable = new Runnable() {
 		@Override
 		public void run() {
-			removeRoom();
+			if(!roomRemoved)
+				removeRoom();
 		}
 	};
 }
