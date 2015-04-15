@@ -1,14 +1,12 @@
 package com.partysearch;
 
 import android.app.ListActivity;
-import android.content.res.Configuration;
 import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.RotateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,11 +23,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.google.ads.*;
 
-public class MainActivity extends ListActivity implements OnClickListener {
+public class MainActivity extends LicenseCheck implements OnClickListener {
 
 	private static final String FIREBASE_URL = "https://blistering-heat-2311.firebaseio.com";
 
@@ -71,7 +67,7 @@ public class MainActivity extends ListActivity implements OnClickListener {
 
 		handler = new Handler();
 		populateSpinner();
-		//loadAd();
+		loadAd();
 
 		// Setup our Firebase mFirebaseRef
 		firebaseRef = new Firebase(FIREBASE_URL).child("chat");
@@ -156,7 +152,7 @@ public class MainActivity extends ListActivity implements OnClickListener {
 				.removeEventListener(mConnectedListener);
 		mChatListAdapter.cleanup();
 		Firebase.goOffline();
-		//removeRoom();
+		removeRoom();
 	}
 
 	@Override
