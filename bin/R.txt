@@ -132,13 +132,14 @@ int drawable common_signin_btn_text_normal_light 0x7f02003c
 int drawable common_signin_btn_text_pressed_dark 0x7f02003d
 int drawable common_signin_btn_text_pressed_light 0x7f02003e
 int drawable ic_launcher 0x7f02003f
-int drawable ic_plusone_medium_off_client 0x7f020040
-int drawable ic_plusone_small_off_client 0x7f020041
-int drawable ic_plusone_standard_off_client 0x7f020042
-int drawable ic_plusone_tall_off_client 0x7f020043
-int drawable powered_by_google_dark 0x7f020044
-int drawable powered_by_google_light 0x7f020045
-int id action_settings 0x7f07002c
+int drawable ic_launcher_web 0x7f020040
+int drawable ic_plusone_medium_off_client 0x7f020041
+int drawable ic_plusone_small_off_client 0x7f020042
+int drawable ic_plusone_standard_off_client 0x7f020043
+int drawable ic_plusone_tall_off_client 0x7f020044
+int drawable powered_by_google_dark 0x7f020045
+int drawable powered_by_google_light 0x7f020046
+int id action_settings 0x7f07002d
 int id adView 0x7f070021
 int id adjust_height 0x7f070002
 int id adjust_width 0x7f070001
@@ -158,6 +159,7 @@ int id grayscale 0x7f070015
 int id holo_dark 0x7f070007
 int id holo_light 0x7f070008
 int id hybrid 0x7f070006
+int id imageView1 0x7f07002c
 int id layout 0x7f070018
 int id level 0x7f07001b
 int id levelHeader 0x7f070024
@@ -187,6 +189,7 @@ int integer google_play_services_version 0x7f090000
 int layout activity_main 0x7f030000
 int layout chat_message 0x7f030001
 int layout room_info 0x7f030002
+int layout splash_screen 0x7f030003
 int menu main 0x7f0c0000
 int raw gtm_analytics 0x7f040000
 int string accept 0x7f060002

@@ -512,15 +512,16 @@ containing a value of this type.
         public static final int common_signin_btn_text_pressed_dark=0x7f02003d;
         public static final int common_signin_btn_text_pressed_light=0x7f02003e;
         public static final int ic_launcher=0x7f02003f;
-        public static final int ic_plusone_medium_off_client=0x7f020040;
-        public static final int ic_plusone_small_off_client=0x7f020041;
-        public static final int ic_plusone_standard_off_client=0x7f020042;
-        public static final int ic_plusone_tall_off_client=0x7f020043;
-        public static final int powered_by_google_dark=0x7f020044;
-        public static final int powered_by_google_light=0x7f020045;
+        public static final int ic_launcher_web=0x7f020040;
+        public static final int ic_plusone_medium_off_client=0x7f020041;
+        public static final int ic_plusone_small_off_client=0x7f020042;
+        public static final int ic_plusone_standard_off_client=0x7f020043;
+        public static final int ic_plusone_tall_off_client=0x7f020044;
+        public static final int powered_by_google_dark=0x7f020045;
+        public static final int powered_by_google_light=0x7f020046;
     }
     public static final class id {
-        public static final int action_settings=0x7f07002c;
+        public static final int action_settings=0x7f07002d;
         public static final int adView=0x7f070021;
         public static final int adjust_height=0x7f070002;
         public static final int adjust_width=0x7f070001;
@@ -540,6 +541,7 @@ containing a value of this type.
         public static final int holo_dark=0x7f070007;
         public static final int holo_light=0x7f070008;
         public static final int hybrid=0x7f070006;
+        public static final int imageView1=0x7f07002c;
         public static final int layout=0x7f070018;
         public static final int level=0x7f07001b;
         public static final int levelHeader=0x7f070024;
@@ -573,6 +575,7 @@ containing a value of this type.
         public static final int activity_main=0x7f030000;
         public static final int chat_message=0x7f030001;
         public static final int room_info=0x7f030002;
+        public static final int splash_screen=0x7f030003;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;
