@@ -746,7 +746,6 @@ com.google.android.gms.ads.InterstitialAd:
 com.google.android.gms.ads.doubleclick.CustomRenderedAd:
     public abstract java.lang.String getBaseUrl()
     public abstract java.lang.String getContent()
-    public abstract void onAdRendered(android.view.View)
     public abstract void recordClick()
     public abstract void recordImpression()
 com.google.android.gms.ads.doubleclick.PublisherAdRequest
@@ -3152,7 +3151,6 @@ com.google.android.gms.internal.zzc$zzj:
 com.google.android.gms.internal.zzch:
     public java.lang.String getBaseUrl()
     public java.lang.String getContent()
-    public void onAdRendered(android.view.View)
     public void recordClick()
     public void recordImpression()
 com.google.android.gms.internal.zzd$zza:

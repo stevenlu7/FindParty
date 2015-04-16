@@ -69,7 +69,7 @@ public class Room {
     	SimpleDateFormat dateFormat = new SimpleDateFormat( "HH:mm" );
     	Calendar cal = Calendar.getInstance();
     	cal.setTimeInMillis(time);
-    	cal.add(Calendar.HOUR, -3); //edt to pst
+    	//cal.add(Calendar.HOUR, -3); //edt to pst
     	String timestamp = dateFormat.format(cal.getTime());
     	return timestamp;
     }

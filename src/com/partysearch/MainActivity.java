@@ -152,7 +152,7 @@ public class MainActivity extends LicenseCheck implements OnClickListener {
 				.removeEventListener(mConnectedListener);
 		mChatListAdapter.cleanup();
 		Firebase.goOffline();
-		removeRoom();
+		//removeRoom();
 	}
 
 	@Override
@@ -218,6 +218,7 @@ public class MainActivity extends LicenseCheck implements OnClickListener {
 	}
 
 	private void removeRoom() {
+		System.out.println("called");
 		if (!firebaseChild.toString().equals(FIREBASE_URL)) {
 			String childPath = splitUrl(firebaseChild.toString());
 			firebaseRef.child(childPath).removeValue();
