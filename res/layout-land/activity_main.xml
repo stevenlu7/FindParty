@@ -84,6 +84,7 @@
         android:imeOptions="flagNoExtractUi"
         android:inputType="textShortMessage"
         android:lines="1"
+        android:maxLength="90"
         android:singleLine="true" />
 
     <TextView

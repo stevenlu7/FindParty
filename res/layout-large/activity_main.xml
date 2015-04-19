@@ -42,6 +42,7 @@
         android:gravity="top|left"
         android:hint="@string/note"
         android:inputType="textShortMessage"
+        android:maxLength="90"
         android:lines="3" />
 
     <ListView
