@@ -48,7 +48,7 @@
     <ListView
         android:id="@android:id/list"
         android:layout_width="325dp"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_alignLeft="@+id/usernameHeader"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/usernameHeader"

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.partysearch"
-    android:versionCode="10"
-    android:versionName="1.1" >
+    android:versionCode="15"
+    android:versionName="1.0.1" >
 
     <uses-sdk
-        android:minSdkVersion="18"
+        android:minSdkVersion="16"
         android:targetSdkVersion="20" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,7 +15,7 @@
     <meta-data
         android:name="ADMOB_ALLOW_LOCATION_FOR_ADS"
         android:value="true" />
-
+    
     <application
         android:name="com.partysearch.ChatApplication"
         android:allowBackup="true"

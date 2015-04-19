@@ -17,9 +17,24 @@
 -dontusemixedcaseclassnames
 -dontskipnonpubliclibraryclasses
 -dontpreverify
+-dontobfuscate
 -verbose
--optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*,!code/allocation/variable
 
+
+-keepattributes Signature
+-keep class com.firebase.** { *; }
+-keep class org.apache.** { *; }
+-keepnames class javax.servlet.** { *; }
+-keepnames class org.ietf.jgss.** { *; }
+-dontwarn org.w3c.dom.**
+-dontwarn org.joda.time.**
+-dontwarn org.ietf.jgss.**
+
+-keep public class com.partysearch.Room {
+  public *** get*();
+  public void set*(***);
+} 
 -keep public class * extends android.app.Activity
 -keep public class * extends android.app.Application
 -keep public class * extends android.app.Service
@@ -32,6 +47,20 @@
 -keep public class * extends android.support.v4.app.Fragment
 -keep public class * extends android.support.v4.app.ListFragment
 
+-dontwarn com.shaded.fasterxml.**
+-dontwarn org.apache.**
+-dontwarn org.shaded.apache.**
+-keepnames class com.shaded.fasterxml.jackson.** { *; }
+-keepnames class org.shaded.apache.**
+
+-keepnames interface com.fasterxml.jackson.** { 
+    *; 
+}
+
+-keep public class * extends com.android.partysearch.ChatApplication
+-keepclassmembers class * extends com.android.partysearch.ChatApplication{
+ public <init>(android.content.Context);
+}
 
 
 -keep public class org.spongycastle.** {
