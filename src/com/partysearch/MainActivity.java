@@ -26,7 +26,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
 public class MainActivity extends LicenseCheck implements OnClickListener {
-
+	//Extends licensecheck to run license check. If want to bypass license check, extend ListActivit instead.
 	private static final String FIREBASE_URL = "https://blistering-heat-2311.firebaseio.com";
 
 	private boolean roomRemoved;
@@ -74,6 +74,8 @@ public class MainActivity extends LicenseCheck implements OnClickListener {
 		firebaseChild = new Firebase(FIREBASE_URL);
 		
 		if(savedInstanceState != null){
+			//When screen orientation changes, activity runs again. I want to 
+			//keep some states of my buttons and url of the room that was created (if any)
 			removeButton.setVisibility(savedInstanceState.getInt("remove"));
 			postButton.setVisibility(savedInstanceState.getInt("post"));
 			firebaseChild = new Firebase(savedInstanceState.getString("url"));
@@ -123,7 +125,8 @@ public class MainActivity extends LicenseCheck implements OnClickListener {
 			}
 		});
 
-		// Finally, a little indication of connection status
+		//not my code
+		// Finally, a little indication of connection status. 
 		mConnectedListener = firebaseRef.getRoot().child(".info/connected")
 				.addValueEventListener(new ValueEventListener() {
 					@Override
@@ -151,7 +154,7 @@ public class MainActivity extends LicenseCheck implements OnClickListener {
 		firebaseRef.getRoot().child(".info/connected")
 				.removeEventListener(mConnectedListener);
 		mChatListAdapter.cleanup();
-		Firebase.goOffline();
+		Firebase.goOffline(); //I only have 50 max connections. Gotta make use of every one of it.
 		//removeRoom();
 	}
 
@@ -163,6 +166,9 @@ public class MainActivity extends LicenseCheck implements OnClickListener {
 	
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
+		//when screen orientation changes, save the visibility of these buttons 
+		//and url of room (if created) 
+		//if I don't do this, firebaseChild will lose the URL string of the room (if created).
 	    super.onSaveInstanceState(savedInstanceState);
 	    savedInstanceState.putInt("remove", removeButton.getVisibility());
 	    savedInstanceState.putInt("post", postButton.getVisibility());
@@ -170,6 +176,7 @@ public class MainActivity extends LicenseCheck implements OnClickListener {
 	}
 	
 	private void loadAd() {
+		//Ads purposes
 		boolean smallSize = getResources().getBoolean(R.bool.isSmall);
 		if (!smallSize) {
 			AdView mAdView = (AdView) findViewById(R.id.adView);
@@ -209,6 +216,8 @@ public class MainActivity extends LicenseCheck implements OnClickListener {
 				.getText().toString()), note.getText().toString(),
 				gametypeSpinner.getSelectedItem().toString(), consoleSpinner
 						.getSelectedItem().toString());
+		//firebaseChild now contains the url of the room created so we can remove it 
+		//when user hits "remove" button
 		firebaseChild = firebaseRef.push();
 		// firebaseRef.push().setValue(newRoom);
 		firebaseChild.setValue(newRoom);
@@ -218,7 +227,8 @@ public class MainActivity extends LicenseCheck implements OnClickListener {
 	}
 
 	private void removeRoom() {
-		System.out.println("called");
+		//if firebaseChild is not the same as FIREBASE_URL,
+		//it means a create has been created by this user
 		if (!firebaseChild.toString().equals(FIREBASE_URL)) {
 			String childPath = splitUrl(firebaseChild.toString());
 			firebaseRef.child(childPath).removeValue();
@@ -227,15 +237,20 @@ public class MainActivity extends LicenseCheck implements OnClickListener {
 			roomRemoved = true;
 		}
 	}
-
+	
+	//Here's a sample URL after a room is created:
+	//https://blistering-heat-2311.firebaseio.com/chat/-JnDVEJ5IHj-zo1Z9rDh
+	//I need the string after chat/ when user wants to remove room
 	private String splitUrl(String url) {
 		String[] parts = url.split("\\/");
 		return parts[parts.length - 1];
 	}
 
+	//background thread for removing room every 17 mins. don't really need this
 	private Runnable runnable = new Runnable() {
 		@Override
 		public void run() {
+			//no need to call removeRoom if room has been removed by user
 			if(!roomRemoved)
 				removeRoom();
 		}
