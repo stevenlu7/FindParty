@@ -8,32 +8,39 @@ import java.util.concurrent.TimeUnit;
 
 import com.firebase.client.ServerValue;
 import com.shaded.fasterxml.jackson.annotation.JsonIgnore;
+import com.shaded.fasterxml.jackson.annotation.JsonProperty;
+import com.shaded.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
 public class Room {
-
-	private String userName;
+	@JsonProperty("userName")
+	private String username;
+	@JsonProperty("level")
 	private int level;
+	@JsonProperty("note")
 	private String note;
+	@JsonProperty("gametype")
 	private String gametype;
+	@JsonProperty("time")
 	private Long time;
+	@JsonProperty("console")
 	private String console;
 	
     // Required default constructor for Firebase object mapping
     @SuppressWarnings("unused")
-    private Room() {
+    public Room() {
     }
 	
-	public Room(String userName, int level, String note, String gametype, String console){
-		this.userName = userName;
+	public Room(String username, int level, String note, String gametype, String console){
+		this.username = username;
 		this.level = level;
 		this.note = note;
 		this.gametype = gametype;
 		this.console = console;
 	}
 	
-	public String getUserName(){
-		return userName;
+	public String getUsername(){
+		return username;
 	}
 	
 	public int getLevel(){

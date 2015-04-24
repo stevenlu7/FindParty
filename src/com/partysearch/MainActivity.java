@@ -28,7 +28,7 @@ import com.google.android.gms.ads.AdView;
 public class MainActivity extends LicenseCheck implements OnClickListener {
 	//Extends licensecheck to run license check. If want to bypass license check, extend ListActivit instead.
 	private static final String FIREBASE_URL = "https://blistering-heat-2311.firebaseio.com";
-
+	//private static final String FIREBASE_URL = "https://testing-lastofus.firebaseio.com";
 	private boolean roomRemoved;
 	private Firebase firebaseRef;
 	private Firebase firebaseChild;
@@ -115,7 +115,7 @@ public class MainActivity extends LicenseCheck implements OnClickListener {
 		// final ListView listView = getListView();
 		// Tell our list adapter that we only want 50 messages at a time
 		mChatListAdapter = new ChatListAdapter(firebaseRef.limit(40), this,
-				R.layout.room_info, psnName.getText().toString());
+				R.layout.room_info);
 		listView.setAdapter(mChatListAdapter);
 		mChatListAdapter.registerDataSetObserver(new DataSetObserver() {
 			@Override

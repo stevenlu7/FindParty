@@ -17,12 +17,12 @@ import com.firebase.client.Query;
 public class ChatListAdapter extends FirebaseListAdapter<Room> {
 
     // The mUsername for this client. We use this to indicate which messages originated from this user
-    private String mUsername; //This was for chat
+    //private String mUsername; //This was for chat
     //private Handler handler;
 
-    public ChatListAdapter(Query ref, Activity activity, int layout, String mUsername) {
+    public ChatListAdapter(Query ref, Activity activity, int layout) {
         super(ref, Room.class, layout, activity);
-        this.mUsername = mUsername;
+        //this.mUsername = mUsername;
     }
 
     /**
@@ -37,7 +37,7 @@ public class ChatListAdapter extends FirebaseListAdapter<Room> {
     protected void populateView(View view, Room room) {
         // Map a Chat object to an entry in our listviewsw
     	//my code
-        String author = room.getUserName();
+        String author = room.getUsername();
         TextView authorText = (TextView) view.findViewById(R.id.user);
         authorText.setText(author);
 

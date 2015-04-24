@@ -17,7 +17,6 @@
 -dontusemixedcaseclassnames
 -dontskipnonpubliclibraryclasses
 -dontpreverify
--dontobfuscate
 -verbose
 -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*,!code/allocation/variable
 
@@ -33,6 +32,7 @@
 
 -keep public class com.partysearch.Room {
   public *** get*();
+  public String getusername();
   public void set*(***);
 } 
 -keep public class * extends android.app.Activity
