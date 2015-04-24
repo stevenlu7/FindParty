@@ -9,6 +9,12 @@ A simple Android client for finding a party for The Last of Us on PS3 and PS4.
        src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
 </a> 
 
+## Features to be added
+  - Chatroom
+  - Texting/Notifications
+  - Update UI
+  - etc.
+  
 ## Libraries
   - Android Support v4
   - Firebase Android Client
