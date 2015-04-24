@@ -1,15 +1,11 @@
 package com.partysearch;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
-
 import com.firebase.client.ServerValue;
 import com.shaded.fasterxml.jackson.annotation.JsonIgnore;
 import com.shaded.fasterxml.jackson.annotation.JsonProperty;
-import com.shaded.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 
 public class Room {
