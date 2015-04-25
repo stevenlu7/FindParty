@@ -10,10 +10,12 @@ A simple Android client for finding a party for The Last of Us on PS3 and PS4.
 </a> 
 
 ## Features to be added
-  - Chatroom
-  - Texting/Notifications
-  - Update UI
+  - [Action Bar](http://developer.android.com/guide/topics/ui/actionbar.html)
+  - [Application preferences](http://developer.android.com/reference/android/preference/Preference.html)
   - [Add Google account login](https://developer.android.com/google/auth/http-auth.html)
+  - Chatroom
+  - Texting/Notifications [1](http://developer.android.com/reference/android/telephony/SmsManager.html)[2](http://www.tutorialspoint.com/android/android_sending_sms.htm)
+  - Update UI
   - etc.
   
 ## Libraries
