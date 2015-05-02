@@ -9,12 +9,16 @@ A simple Android client for finding a party for The Last of Us on PS3 and PS4.
        src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
 </a> 
 
+### TODO
+  - Define a model for chatroom, user, etc.
+
 ## Features to be added
+  - Chatroom
+  - MVP application structure [[1]](http://antonioleiva.com/mvp-android/) [[2]](https://kmangutov.wordpress.com/2015/03/28/android-mvp-consuming-restful-apis/)
   - [Action Bar](http://developer.android.com/guide/topics/ui/actionbar.html)
   - [Application preferences](http://developer.android.com/reference/android/preference/Preference.html)
   - [Google account login](https://developers.google.com/identity/sign-in/android/)
   - Users online counter
-  - Chatroom
   - Texting/Notifications [[1]](http://developer.android.com/reference/android/telephony/SmsManager.html) [[2]](http://www.tutorialspoint.com/android/android_sending_sms.htm)
   - Push Notifications [[1]](https://github.com/TooTallNate/Java-WebSocket) [[2]](https://developer.android.com/google/gcm/index.html)
   - Update UI
